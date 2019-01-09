@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>LaundryBuoy</title>
+        <link href="/img/logotitle.ico" rel="shortcut icon">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    </head>
+    <body>
+
+        <div class="col-sm-6 col-sm-offset-3 jumbotron text-center">
+
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <td><strong>User ID </strong></td>
+                        <td><%= customer.user %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer ID</strong></td>
+                        <td><%= customer._id %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tag</strong></td>
+                        <td><%= customer.tagNumber %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Refered By</strong></td>
+                        <td><%= customer.referedBy %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contact Numbers</strong></td>
+                        <td>
+                            <% customer.numbers.forEach(function(cell){ %>
+                                     <%= cell.number %>. 
+                            <% }) %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="page-header text-center">
+                <a href="/" class="btn btn-default btn-sm">Home</a>
+                <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+                <a href="/admin/customer" class="btn btn-default btn-sm">Back</a>
+            </div>
+
+                <h1><span class="fa fa-user"></span>Update Details</h1>
+
+
+                <!-- UPDATE FORM -->
+                <form action="/admin/customerdetails/<%=customer._id%>" method="post">
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="customer[name]" value="<%= customer.name %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea class="form-control" name="customer[address]"><%= customer.address %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Pincode</label>
+                        <input type="number" class="form-control" name="customer[pinCode]" value="<%= customer.pinCode %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Days Left</label>
+                        <input type="number" class="form-control" name="customer[daysLeft]" value="<%= customer.daysLeft %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Long Clothes</label>
+                        <input type="number" class="form-control" name="customer[longClothes]" value="<%= customer.longClothes %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Short Clothes</label>
+                        <input type="number" class="form-control" name="customer[shortClothes]" value="<%= customer.shortClothes %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Discount coupons</label>
+                        <input type="number" class="form-control" name="customer[discount]" value="<%= customer.discount %>">
+                    </div>
+                    <div class="form-group">
+                        <label>Is Busy</label>
+                            <label class="radio-inline">
+                              <input type="radio" name="radiobusy" value="yes" <% if(customer.isBusy){ %> checked <% } %> >yes
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="radiobusy" value="no" <% if(!customer.isBusy){ %> checked <% } %> >no
+                            </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg">Enter</button>
+                    
+                </form>
+        </div>
+    </body>
+</html>

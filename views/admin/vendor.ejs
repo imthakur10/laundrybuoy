@@ -1,0 +1,89 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>LaundryBuoy</title>
+    <link href="/img/logotitle.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Vendor Page</h1>
+        <a href="/" class="btn btn-default btn-sm">Home</a>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <a href="/admin" class="btn btn-default btn-sm">Back</a>
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3 jumbotron text-center">
+
+        <h3><span class="fa fa-sign-in"></span>Add New Vendor</h3>
+
+        <!-- CREATING -->
+                <form action="/admin/vendors" method="post">
+
+                    <div class="form-group">
+                        <label>Vendor Tag</label>
+                        <input type="text" class="form-control" name="newVendor[username]" value="lbv<%= vendorCount %>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="newVendor[password]">
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="newVendor[name]">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="newVendor[email]">
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea class="form-control" name="newVendor[address]"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="text" class="form-control" name="newVendor[mobile]">
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg">Add new vendor</button>
+                    
+                </form>
+        <!-- CREATING -->
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <td>Tag</td>
+                    <td>Name</td>
+                    <td>Contact</td>
+                </tr>
+                <% vendors.forEach(function(vendor){ %>
+
+                    <tr>
+                        <td>
+                            <a href="/admin/vendors/<%= vendor._id %>" ><%= vendor.username %></a>
+                        </td>
+                        <td><%= vendor.name %></td>
+                        <td><a href="tel:<%= vendor.mobile %>" ><%= vendor.mobile %></a></td>
+                    </tr>
+
+                <% }) %>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

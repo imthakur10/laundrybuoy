@@ -1,0 +1,87 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>LaundryBuoy</title>
+    <link href="/img/logotitle.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Plans </h1>
+        <a href="/" class="btn btn-default btn-sm">Home</a>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <a href="/admin" class="btn btn-default btn-sm">Back</a>
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3 jumbotron text-center">
+
+        <h3><span class="fa fa-sign-in"></span>Add New Plan</h3>
+
+        <!-- CREATING -->
+                <form action="/admin/plans" method="post">
+
+                    <div class="form-group">
+                        <label>Amount</label>
+                        <input type="number" class="form-control" name="newPlan[amount]">
+                    </div>
+                    <div class="form-group">
+                        <label>Long Clothes</label>
+                        <input type="number" class="form-control" name="newPlan[longClothes]">
+                    </div>
+                    <div class="form-group">
+                        <label>Short Clothes</label>
+                        <input type="number" class="form-control" name="newPlan[shortClothes]">
+                    </div>
+                    <div class="form-group">
+                        <label>Validity</label>
+                        <input type="number" class="form-control" name="newPlan[validity]">
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-lg">Add</button>
+                    
+                </form>
+        <!-- CREATING -->
+
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <td>Amount</td>
+                    <td>Long</td>
+                    <td>Short</td>
+                    <td>Validity</td>
+                </tr>
+                <% plans.forEach(function(plan){ %>
+
+                    <tr>
+                        <td><%= plan.amount %></td>
+                        <td><%= plan.longClothes %></td>
+                        <td><%= plan.shortClothes %></td>
+                        <td><%= plan.validity %></td>
+                        <td>
+                            <form class="form-inline" action="/admin/plans/<%=plan._id%>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+
+                <% }) %>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
